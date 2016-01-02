@@ -144,9 +144,27 @@ body {
 
 .calc-row {
   font-size: 2em;
-  padding-top: 1em;
 }
 
 .display {
   font-size: 2.5em;
+  border: 1px solid black;
+  border-bottom: none;
+  padding: .5em 0 .5em 0;
+}
+
+.calc-btn {
+  border: 1px solid black;
+  border-left: none;
+  border-bottom: none;
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+.calc-btn:first-child {
+  border-left: 1px solid black;
+}
+
+.calc-row:last-child .calc-btn {
+  border-bottom: 1px solid black;
 }
