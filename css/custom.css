@@ -110,14 +110,10 @@ body {
  */
 
 @media (min-width: 768px) {
-  /* Pull out the header and footer */
+  /* Pull out the header */
   .masthead {
     position: fixed;
     top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
   }
   /* Start the vertical centering */
   .site-wrapper-inner {
@@ -125,16 +121,28 @@ body {
   }
   /* Handle the widths */
   .masthead,
-  .mastfoot,
   .cover-container {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+
+  .cover {
+    width: 50%;
+    margin: 0 auto;
   }
 }
 
 @media (min-width: 992px) {
   .masthead,
-  .mastfoot,
   .cover-container {
-    width: 700px;
+    width: 850px;
   }
+
+  .cover {
+    width: 50%;
+  }
+}
+
+.calc-row {
+  font-size: 2em;
+  padding-top: 1em;
 }
