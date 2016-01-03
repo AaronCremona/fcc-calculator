@@ -49,6 +49,16 @@ function Calc() {
 		
 		return display;
 	};
+
+	this.backSpace = function() {
+		display = display.slice(0, -1);
+		
+		if (display.length === 0) {
+			display = "0";
+		}
+
+		return display;
+	};
 }
 
 function updateDisplay() {
@@ -59,7 +69,8 @@ function btnListener(e){
 	if (e.target !== e.currentTarget) {
 
 		var clickedBtnId = e.target.id,
-			clickedBtnClass = e.target.classList;
+			clickedBtnClass = e.target.classList,
+			newDisplay = '';
 
 		switch(clickedBtnId) {
 			case '0':
@@ -73,7 +84,11 @@ function btnListener(e){
 			case '8':
 			case '9':
 			case '.':
-				var newDisplay = c.appendValue(clickedBtnId);
+				newDisplay = c.appendValue(clickedBtnId);
+				displayEl.textContent = newDisplay;
+				break;
+			case 'backspace':
+				newDisplay = c.backSpace();
 				displayEl.textContent = newDisplay;
 				break;
 			}	
