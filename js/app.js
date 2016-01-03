@@ -30,14 +30,41 @@
 function Calc() {
 	var display = "0",
 		currentValue = 0,
-		currentFunction = null;
+		currentOperator = null,
+		waitingForNewDisplay = false;
 
 	function consoleIt() {
 		console.log("Display Value: " + display);
 		console.log("Current Value: " + currentValue);
 	}
 
+	function calculateIt() {
+		var displayValue = parseFloat(display);
+
+		switch(currentOperator) {
+			case '/':
+				currentValue = currentValue / displayValue;
+				break;
+			case '*':
+				currentValue = currentValue * displayValue;
+				break;
+			case '-':
+				currentValue = currentValue - displayValue;
+				break;
+			case '+':
+				currentValue = currentValue + displayValue;
+				break;
+		}
+
+		consoleIt();
+	}
+
 	this.appendValue = function(value) {
+		if (waitingForNewDisplay) {
+			display = "";
+			waitingForNewDisplay = false;
+		}
+
 		if (display.length <= 20) {
 			if (display === "0") {
 				display = value;
@@ -47,6 +74,7 @@ function Calc() {
 			}
 		}
 		
+		consoleIt();
 		return display;
 	};
 
@@ -57,20 +85,33 @@ function Calc() {
 			display = "0";
 		}
 
+		consoleIt();
 		return display;
 	};
 
 	this.clearCalc = function() {
 		display = "0";
 		currentValue = 0;
-		currentFunction = null;
+		currentOperator = null;
 
+		consoleIt();
 		return display;
 	};
-}
 
-function updateDisplay() {
+	this.setOperator = function(operator) {
+		if (currentOperator !== null) {
+			calculateIt();
+		}
+		else {
+			currentValue = parseFloat(display);
+		}
 
+		currentOperator = operator;
+
+		waitingForNewDisplay = true;
+
+		consoleIt();
+	};
 }
 
 function btnListener(e){
@@ -103,7 +144,13 @@ function btnListener(e){
 				newDisplay = c.clearCalc();
 				displayEl.textContent = newDisplay;
 				break;
-			}	
+			case '/':
+			case '*':
+			case '-':
+			case '+':
+				newDisplay = c.setOperator(clickedBtnId);
+				break;
+			}
 		}
 
 	e.stopPropagation();
