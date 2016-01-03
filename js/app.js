@@ -29,6 +29,22 @@
 // 	}
 // };
 
-$('.calc-btn').on('click', function(){
-	console.log($(this).attr('id'));
-});
+function btnListener(e){
+	if (e.target !== e.currentTarget) {
+
+		var clickedBtn = e.target.id,
+			clickedBtnClass = e.target.classList;
+		console.log("id: " + clickedBtn + ", class: " + clickedBtnClass);
+	}
+
+	e.stopPropagation();
+};
+
+function appendValue(value) {
+
+}
+
+
+
+var calcContainer = document.querySelector('#calc-container');
+calcContainer.addEventListener('click', btnListener, false);
