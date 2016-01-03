@@ -1,5 +1,3 @@
-
-
 // store most resent result
 // select operator
 // operator click triggers display update
@@ -29,22 +27,42 @@
 // 	}
 // };
 
+function Calc() {
+	var display = "0",
+		currentValue = 0,
+		currentFunction = null;
+
+	function consoleIt() {
+		console.log("Display Value: " + display);
+		console.log("Current Value: " + currentValue);
+	}
+
+	this.appendValue = function(value) {
+		if (display === "0") {
+			display = value;
+		}
+		else {
+			display = display + value;
+		}
+		
+		consoleIt();
+	};
+}
+
 function btnListener(e){
 	if (e.target !== e.currentTarget) {
 
-		var clickedBtn = e.target.id,
+		var clickedBtnId = e.target.id,
 			clickedBtnClass = e.target.classList;
-		console.log("id: " + clickedBtn + ", class: " + clickedBtnClass);
-	}
+
+		c.appendValue(clickedBtnId);	
+		}
 
 	e.stopPropagation();
-};
-
-function appendValue(value) {
-
 }
-
 
 
 var calcContainer = document.querySelector('#calc-container');
 calcContainer.addEventListener('click', btnListener, false);
+
+var c = new Calc();
