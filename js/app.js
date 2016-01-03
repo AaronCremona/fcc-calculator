@@ -45,8 +45,12 @@ function Calc() {
 			display = display + value;
 		}
 		
-		consoleIt();
+		return display;
 	};
+}
+
+function updateDisplay() {
+
 }
 
 function btnListener(e){
@@ -67,7 +71,8 @@ function btnListener(e){
 			case '8':
 			case '9':
 			case '.':
-				c.appendValue(clickedBtnId);
+				var newDisplay = c.appendValue(clickedBtnId);
+				displayEl.textContent = newDisplay;
 				break;
 			}	
 		}
@@ -76,7 +81,9 @@ function btnListener(e){
 }
 
 
-var calcContainer = document.querySelector('#calc-container');
+var calcContainer = document.querySelector('#calc-container'),
+	displayEl = document.querySelector('#display');
+
 calcContainer.addEventListener('click', btnListener, false);
 
 var c = new Calc();
