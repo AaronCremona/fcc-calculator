@@ -59,6 +59,14 @@ function Calc() {
 
 		return display;
 	};
+
+	this.clearCalc = function() {
+		display = "0";
+		currentValue = 0;
+		currentFunction = null;
+
+		return display;
+	};
 }
 
 function updateDisplay() {
@@ -89,6 +97,10 @@ function btnListener(e){
 				break;
 			case 'backspace':
 				newDisplay = c.backSpace();
+				displayEl.textContent = newDisplay;
+				break;
+			case 'clear':
+				newDisplay = c.clearCalc();
 				displayEl.textContent = newDisplay;
 				break;
 			}	
