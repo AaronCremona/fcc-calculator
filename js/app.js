@@ -38,11 +38,13 @@ function Calc() {
 	}
 
 	this.appendValue = function(value) {
-		if (display === "0") {
-			display = value;
-		}
-		else {
-			display = display + value;
+		if (display.length <= 20) {
+			if (display === "0") {
+				display = value;
+			}
+			else {
+				display = display + value;
+			}
 		}
 		
 		return display;
