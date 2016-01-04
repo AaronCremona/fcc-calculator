@@ -8,8 +8,8 @@ function Calc() {
 
 	function consoleIt() {
 		console.log("***************************************");
-		console.log("Display Value: " + display);
-		console.log("Current Value: " + currentValue);
+		console.log("Display Value: " + display + " " + typeof display);
+		console.log("Current Value: " + currentValue + " " + typeof currentValue);
 		console.log("Current Operator: " + currentOperator);
 		console.log("waitingForNewDisplay: " + waitingForNewDisplay);
 		console.log("waitingForOperator: " + waitingForOperator);
@@ -51,7 +51,9 @@ function Calc() {
 			currentValue = result[0].toString();
 		}
 
-		consoleIt();
+		display = currentValue; 
+
+		currentValue = parseFloat(currentValue);
 	}
 
 	this.appendValue = function(value) {
@@ -119,13 +121,12 @@ function Calc() {
 		}
 
 		consoleIt();
+		return display;
 	};
 
 	this.totalIt = function() {
 		if (!waitingForNewDisplay && currentOperator !== null) {
 			calculateIt();
-
-			display = currentValue;
 
 			currentOperator = null;
 			waitingForOperator = true;
@@ -185,7 +186,8 @@ function btnListener(e){
 			case '*':
 			case '-':
 			case '+':
-				c.setOperator(clickedBtnId);
+				newDisplay = c.setOperator(clickedBtnId);
+				displayEl.textContent = newDisplay;
 				break;
 			case '=':
 				newDisplay = c.totalIt();
