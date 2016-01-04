@@ -3,13 +3,17 @@ function Calc() {
 		currentValue = 0,
 		currentOperator = null,
 		waitingForNewDisplay = false,
-		waitingForOperator = false;
+		waitingForOperator = false,
+		blockOperatorAction = true;
 
 	function consoleIt() {
+		console.log("***************************************");
 		console.log("Display Value: " + display);
 		console.log("Current Value: " + currentValue);
 		console.log("Current Operator: " + currentOperator);
 		console.log("waitingForNewDisplay: " + waitingForNewDisplay);
+		console.log("waitingForOperator: " + waitingForOperator);
+		console.log("blockOperatorAction: " + blockOperatorAction);
 	}
 
 	function calculateIt() {
@@ -57,6 +61,10 @@ function Calc() {
 				waitingForNewDisplay = false;
 			}
 
+			if (blockOperatorAction) {
+				blockOperatorAction = false;
+			}
+
 			if (display.length < 15) {
 				if (display === "0") {
 					display = value;
@@ -88,23 +96,27 @@ function Calc() {
 		display = "0";
 		currentValue = 0;
 		currentOperator = null;
+		waitingForOperator = false;
 
 		consoleIt();
 		return display;
 	};
 
 	this.setOperator = function(operator) {
-		if (currentOperator !== null) {
-			calculateIt();
-		}
-		else {
-			currentValue = parseFloat(display);
-		}
+		if (!blockOperatorAction) {
 
-		currentOperator = operator;
+			if (currentOperator !== null) {
+				calculateIt();
+			}
+			else {
+				currentValue = parseFloat(display);
+			}
 
-		waitingForNewDisplay = true;
-		waitingForOperator = false;
+			currentOperator = operator;
+
+			waitingForNewDisplay = true;
+			waitingForOperator = false;
+		}
 
 		consoleIt();
 	};
@@ -134,7 +146,7 @@ function Calc() {
 				display = "-" + display;
 			}
 		}
-		
+
 		return display;
 	}
 }
