@@ -126,13 +126,15 @@ function Calc() {
 	};
 
 	this.togglePlusMin = function() {
-		if (display[0] === "-") {
-			display = display.slice(1);
+		if (display !== '0') {
+			if (display[0] === "-") {
+				display = display.slice(1);
+			}
+			else {
+				display = "-" + display;
+			}
 		}
-		else {
-			display = "-" + display;
-		}
-
+		
 		return display;
 	}
 }
