@@ -161,6 +161,9 @@ body {
   border-bottom: none;
   padding-top: .5em;
   padding-bottom: .5em;
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 }
 
 .calc-btn:first-child {
@@ -182,6 +185,10 @@ body {
 
 .calc-btn:active {
   background-color: #aaa;
+}
+
+.calc-btn:hover {
+  cursor: pointer;
 }
 
 .gray:active {
