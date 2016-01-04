@@ -58,6 +58,8 @@ function Calc() {
 				break;
 		}
 
+
+
 		consoleIt();
 	}
 
@@ -67,7 +69,7 @@ function Calc() {
 			waitingForNewDisplay = false;
 		}
 
-		if (display.length <= 20) {
+		if (display.length < 15) {
 			if (display === "0") {
 				display = value;
 			}
