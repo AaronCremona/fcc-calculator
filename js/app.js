@@ -43,22 +43,37 @@ function Calc() {
 	function calculateIt() {
 		var displayValue = parseFloat(display);
 
+		var result = 0;
+
 		switch(currentOperator) {
 			case '/':
-				currentValue = currentValue / displayValue;
+				result = currentValue / displayValue;
 				break;
 			case '*':
-				currentValue = currentValue * displayValue;
+				result = currentValue * displayValue;
 				break;
 			case '-':
-				currentValue = currentValue - displayValue;
+				result = currentValue - displayValue;
 				break;
 			case '+':
-				currentValue = currentValue + displayValue;
+				result = currentValue + displayValue;
 				break;
 		}
 
+		result = result.toPrecision(15);
 
+		result = result.split(".");
+
+		while (result[1].charAt(result[1].length -1) === '0') {
+			result[1] = result[1].slice(0,-1);
+		}
+
+		if (result[1].length != 0) {
+			currentValue = result.join(".");
+		}
+		else {
+			currentValue = result[0].toString();
+		}
 
 		consoleIt();
 	}
