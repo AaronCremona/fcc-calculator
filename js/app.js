@@ -81,7 +81,9 @@ function Calc() {
 	};
 
 	this.backSpace = function() {
-		display = display.slice(0, -1);
+		if (typeof display === 'string') {
+			display = display.slice(0, -1);
+		}
 		
 		if (display.length === 0) {
 			display = "0";
