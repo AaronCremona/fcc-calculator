@@ -44,7 +44,7 @@ function Calc() {
 			result[1] = result[1].slice(0,-1);
 		}
 
-		if (result[1].length != 0) {
+		if (result[1].length !== 0) {
 			currentValue = result.join(".");
 		}
 		else {
@@ -148,7 +148,7 @@ function Calc() {
 		}
 
 		return display;
-	}
+	};
 }
 
 function btnListener(e){
