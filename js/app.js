@@ -36,6 +36,8 @@ function Calc() {
 	function consoleIt() {
 		console.log("Display Value: " + display);
 		console.log("Current Value: " + currentValue);
+		console.log("Current Operator: " + currentOperator);
+		console.log("waitingForNewDisplay: " + waitingForNewDisplay);
 	}
 
 	function calculateIt() {
@@ -112,6 +114,21 @@ function Calc() {
 
 		consoleIt();
 	};
+
+	this.totalIt = function() {
+		if (!waitingForNewDisplay && currentOperator !== null) {
+			calculateIt();
+
+			display = currentValue;
+
+			currentOperator = null;
+
+			consoleIt();
+		}
+
+		return display;
+
+	};
 }
 
 function btnListener(e){
@@ -148,7 +165,11 @@ function btnListener(e){
 			case '*':
 			case '-':
 			case '+':
-				newDisplay = c.setOperator(clickedBtnId);
+				c.setOperator(clickedBtnId);
+				break;
+			case '=':
+				newDisplay = c.totalIt();
+				displayEl.textContent = newDisplay;
 				break;
 			}
 		}
