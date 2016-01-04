@@ -31,7 +31,8 @@ function Calc() {
 	var display = "0",
 		currentValue = 0,
 		currentOperator = null,
-		waitingForNewDisplay = false;
+		waitingForNewDisplay = false,
+		waitingForOperator = false;
 
 	function consoleIt() {
 		console.log("Display Value: " + display);
@@ -98,7 +99,7 @@ function Calc() {
 	};
 
 	this.backSpace = function() {
-		if (typeof display === 'string') {
+		if (!waitingForOperator) {
 			display = display.slice(0, -1);
 		}
 		
@@ -130,6 +131,7 @@ function Calc() {
 		currentOperator = operator;
 
 		waitingForNewDisplay = true;
+		waitingForOperator = false;
 
 		consoleIt();
 	};
@@ -141,6 +143,7 @@ function Calc() {
 			display = currentValue;
 
 			currentOperator = null;
+			waitingForOperator = true;
 
 			consoleIt();
 		}
