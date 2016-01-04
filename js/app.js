@@ -51,20 +51,22 @@ function Calc() {
 	}
 
 	this.appendValue = function(value) {
-		if (waitingForNewDisplay) {
-			display = "";
-			waitingForNewDisplay = false;
+		if (!waitingForOperator) {
+			if (waitingForNewDisplay) {
+				display = "";
+				waitingForNewDisplay = false;
+			}
+
+			if (display.length < 15) {
+				if (display === "0") {
+					display = value;
+				}
+				else {
+					display = display + value;
+				}
+			}
 		}
 
-		if (display.length < 15) {
-			if (display === "0") {
-				display = value;
-			}
-			else {
-				display = display + value;
-			}
-		}
-		
 		consoleIt();
 		return display;
 	};
@@ -122,6 +124,17 @@ function Calc() {
 		return display;
 
 	};
+
+	this.togglePlusMin = function() {
+		if (display[0] === "-") {
+			display = display.slice(1);
+		}
+		else {
+			display = "-" + display;
+		}
+
+		return display;
+	}
 }
 
 function btnListener(e){
@@ -164,6 +177,9 @@ function btnListener(e){
 				newDisplay = c.totalIt();
 				displayEl.textContent = newDisplay;
 				break;
+			case 'plusMin':
+				newDisplay = c.togglePlusMin();
+				displayEl.textContent = newDisplay;
 			}
 		}
 
